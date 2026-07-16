@@ -7,12 +7,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0f1117;--card:#1a1d27;--card2:#21253a;
-  --accent:#4f8ef7;--text:#e8eaf0;--muted:#7a7f9a;
-  --border:#2a2f45;--red:#f74f4f;--yellow:#f7c94f;--green:#4ff7a0;
-  --purple:#a78bfa;--success:#1a3a2a;--danger:#3a1a1a;
-}
+:root{--bg:#0f1117;--card:#1a1d27;--card2:#21253a;--accent:#4f8ef7;--text:#e8eaf0;--muted:#7a7f9a;--border:#2a2f45;--red:#f74f4f;--yellow:#f7c94f;--green:#4ff7a0;--purple:#a78bfa;--success:#1a3a2a;--danger:#3a1a1a;}
 body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:16px 14px 60px}
 header{text-align:center;margin-bottom:20px}
 header h1{font-size:1.4rem;font-weight:900}
@@ -28,8 +23,8 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
 .btn:hover{border-color:var(--accent);color:var(--accent)}
 .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .btn.primary:hover{opacity:0.85}
-.btn.danger{background:var(--red);color:#fff;border-color:var(--red)}
-.btn.success{background:#1a5a2a;color:var(--green);border-color:var(--green)}
+.btn.sm{padding:5px 10px;font-size:0.75rem}
+.btn.danger-btn{background:var(--danger);color:var(--red);border-color:var(--red)}
 .btn:disabled{opacity:0.4;cursor:not-allowed}
 .badge{display:inline-block;padding:4px 11px;border-radius:10px;font-size:0.73rem;font-weight:700;background:var(--card2);color:var(--muted)}
 .badge.success{background:var(--success);color:var(--green)}
@@ -38,6 +33,8 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
 .badge.purple{background:rgba(167,139,250,0.15);color:var(--purple)}
 .result{margin-top:10px;font-size:0.88rem;font-weight:700;min-height:22px}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.input{padding:8px 12px;border:1px solid var(--border);border-radius:10px;background:var(--card2);color:var(--text);font-size:0.85rem;font-family:'Noto Sans KR',sans-serif;width:100%}
+.input:focus{outline:none;border-color:var(--accent)}
 
 /* 로또 */
 .lotto-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin:10px 0}
@@ -78,34 +75,44 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
 
 /* 운세 */
 .fortune-zodiac{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0}
-.zodiac-btn{padding:10px 4px;border:1px solid var(--border);border-radius:10px;background:var(--card2);color:var(--text);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;text-align:center;transition:all 0.15s}
+.zodiac-btn{padding:10px 4px;border:1px solid var(--border);border-radius:10px;background:var(--card2);color:var(--text);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;text-align:center;transition:all 0.15s;line-height:1.4}
 .zodiac-btn:hover{border-color:var(--purple);color:var(--purple)}
 .zodiac-btn.active{background:rgba(167,139,250,0.2);border-color:var(--purple);color:var(--purple)}
-.fortune-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:12px;display:none}
-.fortune-card.show{display:block}
-.fortune-score{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}
-.fortune-item{background:var(--card);border-radius:10px;padding:10px 12px}
-.fortune-item .fi-label{font-size:0.72rem;color:var(--muted);margin-bottom:4px}
-.fortune-item .fi-stars{font-size:1rem;letter-spacing:2px}
-.fortune-item .fi-text{font-size:0.78rem;color:var(--text);margin-top:3px}
-.fortune-lucky{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.fortune-result-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:12px;display:none}
+.fortune-result-card.show{display:block}
+.fortune-section{margin-bottom:14px}
+.fortune-section-title{font-size:0.75rem;color:var(--muted);font-weight:700;margin-bottom:6px;letter-spacing:1px}
+.fortune-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.fortune-item{background:var(--card);border-radius:10px;padding:12px}
+.fi-label{font-size:0.72rem;color:var(--muted);margin-bottom:6px}
+.fi-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:4px}
+.fi-bar-fill{height:100%;border-radius:3px}
+.fi-text{font-size:0.78rem;color:var(--text);line-height:1.5}
+.fortune-years{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.year-badge{padding:4px 10px;border-radius:20px;font-size:0.73rem;font-weight:700;background:rgba(167,139,250,0.15);color:var(--purple)}
+.fortune-main-msg{font-size:0.88rem;line-height:1.7;color:var(--text);padding:12px;background:var(--card);border-radius:10px;margin-bottom:12px}
+.lucky-row{display:flex;gap:8px;flex-wrap:wrap}
 .lucky-badge{padding:5px 12px;border-radius:20px;font-size:0.75rem;font-weight:700}
 
-/* 주사위 배틀 */
+/* 주사위 */
 .dice-area{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
 .dice-box{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
 .dice-box .label{font-size:0.75rem;color:var(--muted);margin-bottom:8px}
-.dice{font-size:3.5rem;display:block;margin:4px 0;transition:transform 0.3s}
+.dice{font-size:3.5rem;display:block;margin:4px 0}
 .dice.rolling{animation:roll 0.4s ease-out}
 @keyframes roll{0%{transform:rotate(0deg) scale(0.5)}50%{transform:rotate(180deg) scale(1.2)}100%{transform:rotate(360deg) scale(1)}}
-.dice-score{font-size:1.4rem;font-weight:900;color:var(--text)}
+.dice-score{font-size:1.4rem;font-weight:900}
 .dice-history{margin-top:10px;font-size:0.78rem;color:var(--muted)}
 
 /* 룰렛 */
 .roulette-wrap{position:relative;width:240px;height:240px;margin:12px auto}
 .roulette-canvas{border-radius:50%;border:3px solid var(--border)}
-.roulette-pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:1.4rem}
-.roulette-result{text-align:center;margin-top:12px;font-size:1.2rem;font-weight:900;min-height:32px}
+.roulette-pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:1.6rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))}
+.roulette-result{text-align:center;margin-top:12px;font-size:1.3rem;font-weight:900;min-height:36px}
+.roulette-item-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.roulette-item-input{flex:1;padding:7px 10px;border:1px solid var(--border);border-radius:8px;background:var(--card2);color:var(--text);font-size:0.82rem;font-family:'Noto Sans KR',sans-serif}
+.roulette-item-input:focus{outline:none;border-color:var(--accent)}
+.roulette-items-wrap{max-height:200px;overflow-y:auto;margin:10px 0;padding-right:4px}
 
 /* 블랙잭 */
 .bj-area{margin:10px 0}
@@ -113,8 +120,6 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
 .bj-cards{display:flex;gap:7px;flex-wrap:wrap;min-height:80px;margin-bottom:8px}
 .bj-card{width:52px;height:76px;border-radius:8px;background:var(--card2);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;flex-shrink:0}
 .bj-card.red{color:var(--red)}
-.bj-card.hidden{background:var(--border);color:transparent;font-size:1.5rem}
-.bj-score{font-size:1.1rem;font-weight:900;color:var(--accent);margin-bottom:6px}
 .bj-chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
 .bj-chip{width:44px;height:44px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:900;cursor:pointer;transition:all 0.15s}
 .bj-chip:hover{transform:scale(1.1)}
@@ -129,17 +134,16 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
   <h1>🎮 미니게임 모음</h1>
   <p>10가지 게임을 즐겨보세요!</p>
 </header>
-
 <div class="nav">
   <button class="active" onclick="showTab('lotto',this)">🎰 로또</button>
   <button onclick="showTab('memory',this)">🧠 기억력</button>
   <button onclick="showTab('react',this)">⚡ 반응속도</button>
   <button onclick="showTab('updown',this)">🎯 업다운</button>
   <button onclick="showTab('card',this)">🃏 짝맞추기</button>
-  <button onclick="showTab('fortune',this)">🔮 오늘의운세</button>
-  <button onclick="showTab('dice',this)">🎲 주사위배틀</button>
+  <button onclick="showTab('fortune',this)">🔮 운세</button>
+  <button onclick="showTab('dice',this)">🎲 주사위</button>
   <button onclick="showTab('roulette',this)">🎪 룰렛</button>
-  <button onclick="showTab('blackjack',this)">🃏 블랙잭</button>
+  <button onclick="showTab('blackjack',this)">♠ 블랙잭</button>
   <button onclick="showTab('g2048',this)">🧩 2048</button>
 </div>
 
@@ -219,9 +223,7 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
       <span class="badge" id="card-time">0초</span>
     </div>
     <div class="card-grid" id="card-grid"></div>
-    <div class="row">
-      <button class="btn primary" onclick="cardReset()">🔄 새 게임</button>
-    </div>
+    <div class="row"><button class="btn primary" onclick="cardReset()">🔄 새 게임</button></div>
     <div class="result" id="card-result"></div>
   </div>
 </div>
@@ -232,26 +234,18 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
     <div class="card-title">🔮 오늘의 운세</div>
     <div class="card-sub">띠를 선택하면 오늘의 운세를 알려드려요!</div>
     <div class="fortune-zodiac" id="fortune-zodiac"></div>
-    <div class="fortune-card" id="fortune-result"></div>
+    <div class="fortune-result-card" id="fortune-result"></div>
   </div>
 </div>
 
-<!-- 주사위 배틀 -->
+<!-- 주사위 -->
 <div id="tab-dice" class="panel">
   <div class="card">
     <div class="card-title">🎲 주사위 배틀</div>
     <div class="card-sub">컴퓨터와 주사위 대결! 높은 숫자가 이겨요</div>
     <div class="dice-area">
-      <div class="dice-box">
-        <div class="label">나</div>
-        <span class="dice" id="my-dice">⚀</span>
-        <div class="dice-score" id="my-score">-</div>
-      </div>
-      <div class="dice-box">
-        <div class="label">컴퓨터</div>
-        <span class="dice" id="com-dice">⚀</span>
-        <div class="dice-score" id="com-score">-</div>
-      </div>
+      <div class="dice-box"><div class="label">나</div><span class="dice" id="my-dice">⚀</span><div class="dice-score" id="my-score">-</div></div>
+      <div class="dice-box"><div class="label">컴퓨터</div><span class="dice" id="com-dice">⚀</span><div class="dice-score" id="com-score">-</div></div>
     </div>
     <div class="result" id="dice-result" style="text-align:center;font-size:1rem"></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">
@@ -259,9 +253,7 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
       <span class="badge danger" id="dice-lose">패: 0</span>
       <span class="badge" id="dice-draw">무: 0</span>
     </div>
-    <div class="row">
-      <button class="btn primary" onclick="rollDice()" id="dice-btn">🎲 주사위 굴리기</button>
-    </div>
+    <div class="row"><button class="btn primary" onclick="rollDice()" id="dice-btn">🎲 굴리기</button></div>
     <div class="dice-history" id="dice-history"></div>
   </div>
 </div>
@@ -270,7 +262,19 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
 <div id="tab-roulette" class="panel">
   <div class="card">
     <div class="card-title">🎪 복불복 룰렛</div>
-    <div class="card-sub">운명의 룰렛을 돌려보세요!</div>
+    <div class="card-sub">항목을 직접 입력하고 룰렛을 돌려보세요!</div>
+
+    <!-- 항목 설정 -->
+    <div style="background:var(--card2);border-radius:12px;padding:14px;margin-bottom:14px">
+      <div style="font-size:0.78rem;font-weight:700;color:var(--muted);margin-bottom:10px">⚙️ 항목 설정</div>
+      <div class="roulette-items-wrap" id="roulette-items-wrap"></div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn sm primary" onclick="addRouletteItem()">+ 항목 추가</button>
+        <button class="btn sm" onclick="resetRouletteItems()">기본값으로</button>
+        <button class="btn sm" onclick="applyRoulette()">✅ 적용</button>
+      </div>
+    </div>
+
     <div class="roulette-wrap">
       <div class="roulette-pointer">▼</div>
       <canvas class="roulette-canvas" id="roulette-canvas" width="240" height="240"></canvas>
@@ -285,7 +289,7 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
 <!-- 블랙잭 -->
 <div id="tab-blackjack" class="panel">
   <div class="card">
-    <div class="card-title">🃏 블랙잭</div>
+    <div class="card-title">♠ 블랙잭</div>
     <div class="card-sub">21에 가까운 쪽이 이겨요! 21을 넘으면 버스트!</div>
     <div style="display:flex;gap:6px;margin-bottom:8px">
       <span class="badge accent">💰 보유: <span id="bj-money">1000</span></span>
@@ -294,14 +298,14 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
     <div class="bj-area">
       <div class="bj-label">딜러</div>
       <div class="bj-cards" id="dealer-cards"></div>
-      <div class="bj-score" id="dealer-score"></div>
+      <div style="font-size:1.1rem;font-weight:900;color:var(--accent);margin-bottom:6px" id="dealer-score"></div>
       <div class="bj-label">나</div>
       <div class="bj-cards" id="player-cards"></div>
-      <div class="bj-score" id="player-score"></div>
+      <div style="font-size:1.1rem;font-weight:900;color:var(--accent);margin-bottom:6px" id="player-score"></div>
     </div>
     <div class="bj-chips" id="bj-chips"></div>
     <div class="row" id="bj-actions">
-      <button class="btn primary" onclick="bjDeal()" id="bj-deal-btn">🃏 게임 시작</button>
+      <button class="btn primary" onclick="bjDeal()">🃏 게임 시작</button>
     </div>
     <div class="result" id="bj-result" style="font-size:1rem"></div>
   </div>
@@ -318,107 +322,38 @@ header p{color:var(--muted);font-size:0.78rem;margin-top:4px}
     </div>
     <div class="g2048-grid" id="g2048-grid"></div>
     <div style="display:grid;grid-template-columns:repeat(3,44px);gap:6px;margin:10px auto;width:fit-content">
-      <div></div>
-      <button class="btn" style="padding:8px;width:44px" onclick="move2048('up')">▲</button>
-      <div></div>
+      <div></div><button class="btn" style="padding:8px;width:44px" onclick="move2048('up')">▲</button><div></div>
       <button class="btn" style="padding:8px;width:44px" onclick="move2048('left')">◀</button>
       <button class="btn" style="padding:8px;width:44px" onclick="move2048('down')">▼</button>
       <button class="btn" style="padding:8px;width:44px" onclick="move2048('right')">▶</button>
     </div>
-    <div class="row">
-      <button class="btn primary" onclick="init2048()">🔄 새 게임</button>
-    </div>
+    <div class="row"><button class="btn primary" onclick="init2048()">🔄 새 게임</button></div>
     <div class="result" id="g2048-result"></div>
   </div>
 </div>
 
 <script>
-function showTab(name,btn){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('show');
-  btn.classList.add('active');
-}
+function showTab(name,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+name).classList.add('show');btn.classList.add('active');}
 
 // ===== 로또 =====
-const BC=['#f7c94f','#4fbff7','#f74f4f','#888','#4ff7a0','#a78bfa'];
-const BT=['#333','#fff','#fff','#fff','#333','#fff'];
+const BC=['#f7c94f','#4fbff7','#f74f4f','#888','#4ff7a0','#a78bfa'],BT=['#333','#fff','#fff','#fff','#333','#fff'];
 let lSel=[];
-function initLotto(){
-  const g=document.getElementById('lotto-grid');g.innerHTML='';
-  for(let i=1;i<=45;i++){const b=document.createElement('div');b.className='lball';b.textContent=i;b.id='lb'+i;b.onclick=()=>lToggle(i);g.appendChild(b);}
-}
+function initLotto(){const g=document.getElementById('lotto-grid');g.innerHTML='';for(let i=1;i<=45;i++){const b=document.createElement('div');b.className='lball';b.textContent=i;b.id='lb'+i;b.onclick=()=>lToggle(i);g.appendChild(b);}}
 function lToggle(n){if(lSel.includes(n))lSel=lSel.filter(x=>x!==n);else if(lSel.length<6)lSel.push(n);lRender();}
-function lRender(){
-  for(let i=1;i<=45;i++){const b=document.getElementById('lb'+i);const idx=lSel.indexOf(i);if(idx>=0){b.style.background=BC[idx];b.style.color=BT[idx];b.style.borderColor=BC[idx];}else{b.style.background='';b.style.color='';b.style.borderColor='';}}
-  document.getElementById('lotto-picks').innerHTML=lSel.map((n,i)=>`<div class="pick-ball" style="background:${BC[i]};color:${BT[i]}">${n}</div>`).join('');
-  document.getElementById('lotto-count').textContent=`${lSel.length}/6 선택`;
-  document.getElementById('lotto-result').innerHTML=lSel.length===6?'<span style="color:var(--green)">✅ 번호 선택 완료! 행운을 빌어요 🍀</span>':'';
-}
+function lRender(){for(let i=1;i<=45;i++){const b=document.getElementById('lb'+i);const idx=lSel.indexOf(i);if(idx>=0){b.style.background=BC[idx];b.style.color=BT[idx];b.style.borderColor=BC[idx];}else{b.style.background='';b.style.color='';b.style.borderColor='';}}document.getElementById('lotto-picks').innerHTML=lSel.map((n,i)=>`<div class="pick-ball" style="background:${BC[i]};color:${BT[i]}">${n}</div>`).join('');document.getElementById('lotto-count').textContent=lSel.length+'/6 선택';document.getElementById('lotto-result').innerHTML=lSel.length===6?'<span style="color:var(--green)">✅ 번호 선택 완료! 행운을 빌어요 🍀</span>':'';}
 function lottoAuto(){const n=[];while(n.length<6){const x=Math.floor(Math.random()*45)+1;if(!n.includes(x))n.push(x);}lSel=n.sort((a,b)=>a-b);lRender();}
 function lottoClear(){lSel=[];lRender();}
 initLotto();lRender();
 
 // ===== 기억력 =====
 let mSeq=[],mInput=[],mBest=0,mPhase='idle',mLevel=3;
-function memStart(){
-  mSeq=[];mInput=[];mPhase='show';
-  for(let i=0;i<mLevel;i++)mSeq.push(Math.floor(Math.random()*9)+1);
-  document.getElementById('mem-level').textContent=mLevel+'단계';
-  document.getElementById('mem-start-btn').disabled=true;
-  document.getElementById('mem-num-grid').style.display='none';
-  document.getElementById('mem-result').textContent='';
-  document.getElementById('mem-progress').style.width='0%';
-  document.getElementById('mem-progress').style.background='var(--accent)';
-  const disp=document.getElementById('mem-display');
-  const prog=document.getElementById('mem-progress');
-  let i=0;
-  function showNext(){
-    if(i>=mSeq.length){disp.classList.remove('blink');disp.textContent='입력하세요!';prog.style.width='0%';
-      setTimeout(()=>{document.getElementById('mem-num-grid').style.display='grid';mPhase='input';document.getElementById('mem-start-btn').disabled=false;initMemGrid();},300);return;}
-    prog.style.width=((i+1)/mSeq.length*100)+'%';
-    disp.classList.add('blink');disp.textContent=mSeq[i];
-    setTimeout(()=>{disp.classList.remove('blink');setTimeout(()=>{disp.classList.add('blink');i++;setTimeout(showNext,200);},500);},200);
-  }
-  disp.textContent='';setTimeout(showNext,300);
-}
-function initMemGrid(){
-  const g=document.getElementById('mem-num-grid');g.innerHTML='';
-  for(let i=1;i<=9;i++){const b=document.createElement('button');b.className='mem-btn';b.textContent=i;b.onclick=()=>memIn(i);g.appendChild(b);}
-}
-function memIn(n){
-  if(mPhase!=='input')return;
-  mInput.push(n);
-  document.querySelectorAll('.mem-btn').forEach(b=>{if(parseInt(b.textContent)===n){b.classList.add('pressed');setTimeout(()=>b.classList.remove('pressed'),150);}});
-  const prog=document.getElementById('mem-progress');
-  prog.style.background='var(--green)';prog.style.width=(mInput.length/mSeq.length*100)+'%';
-  if(n!==mSeq[mInput.length-1]){
-    prog.style.background='var(--red)';prog.style.width='100%';
-    document.getElementById('mem-result').innerHTML=`<span style="color:var(--red)">❌ 틀렸어요! 정답: ${mSeq.join(' → ')}</span>`;
-    document.getElementById('mem-num-grid').style.display='none';
-    document.getElementById('mem-display').textContent='다시 도전!';
-    mPhase='idle';mLevel=3;document.getElementById('mem-level').textContent='3단계';return;
-  }
-  if(mInput.length===mSeq.length){
-    mBest=Math.max(mBest,mLevel);document.getElementById('mem-best').textContent='최고: '+mBest+'단계';
-    document.getElementById('mem-result').innerHTML=`<span style="color:var(--green)">✅ ${mLevel}개 성공! 다음 단계!</span>`;
-    document.getElementById('mem-num-grid').style.display='none';
-    document.getElementById('mem-display').textContent='🎉';
-    mPhase='idle';mLevel++;setTimeout(()=>memStart(),1200);
-  }
-}
+function memStart(){mSeq=[];mInput=[];mPhase='show';for(let i=0;i<mLevel;i++)mSeq.push(Math.floor(Math.random()*9)+1);document.getElementById('mem-level').textContent=mLevel+'단계';document.getElementById('mem-start-btn').disabled=true;document.getElementById('mem-num-grid').style.display='none';document.getElementById('mem-result').textContent='';document.getElementById('mem-progress').style.width='0%';document.getElementById('mem-progress').style.background='var(--accent)';const disp=document.getElementById('mem-display'),prog=document.getElementById('mem-progress');let i=0;function showNext(){if(i>=mSeq.length){disp.classList.remove('blink');disp.textContent='입력하세요!';prog.style.width='0%';setTimeout(()=>{document.getElementById('mem-num-grid').style.display='grid';mPhase='input';document.getElementById('mem-start-btn').disabled=false;initMemGrid();},300);return;}prog.style.width=((i+1)/mSeq.length*100)+'%';disp.classList.add('blink');disp.textContent=mSeq[i];setTimeout(()=>{disp.classList.remove('blink');setTimeout(()=>{disp.classList.add('blink');i++;setTimeout(showNext,200);},500);},200);}disp.textContent='';setTimeout(showNext,300);}
+function initMemGrid(){const g=document.getElementById('mem-num-grid');g.innerHTML='';for(let i=1;i<=9;i++){const b=document.createElement('button');b.className='mem-btn';b.textContent=i;b.onclick=()=>memIn(i);g.appendChild(b);}}
+function memIn(n){if(mPhase!=='input')return;mInput.push(n);document.querySelectorAll('.mem-btn').forEach(b=>{if(parseInt(b.textContent)===n){b.classList.add('pressed');setTimeout(()=>b.classList.remove('pressed'),150);}});const prog=document.getElementById('mem-progress');prog.style.background='var(--green)';prog.style.width=(mInput.length/mSeq.length*100)+'%';if(n!==mSeq[mInput.length-1]){prog.style.background='var(--red)';prog.style.width='100%';document.getElementById('mem-result').innerHTML=`<span style="color:var(--red)">❌ 틀렸어요! 정답: ${mSeq.join(' → ')}</span>`;document.getElementById('mem-num-grid').style.display='none';document.getElementById('mem-display').textContent='다시 도전!';mPhase='idle';mLevel=3;document.getElementById('mem-level').textContent='3단계';return;}if(mInput.length===mSeq.length){mBest=Math.max(mBest,mLevel);document.getElementById('mem-best').textContent='최고: '+mBest+'단계';document.getElementById('mem-result').innerHTML=`<span style="color:var(--green)">✅ ${mLevel}개 성공! 다음 단계!</span>`;document.getElementById('mem-num-grid').style.display='none';document.getElementById('mem-display').textContent='🎉';mPhase='idle';mLevel++;setTimeout(()=>memStart(),1200);}}
 
 // ===== 반응속도 =====
 let rState='idle',rTimer=null,rStart=0,rBest=null,rHist=[];
-function reactClick(){
-  const c=document.getElementById('react-circle');
-  if(rState==='idle'){rState='waiting';c.className='react-circle ready';c.innerHTML='잠깐만요...';rTimer=setTimeout(()=>{rState='go';c.className='react-circle go';c.innerHTML='지금!<br>클릭!';rStart=Date.now();},1500+Math.random()*3000);}
-  else if(rState==='waiting'){clearTimeout(rTimer);rState='idle';c.className='react-circle';c.innerHTML='너무 빨라요!<br>다시 클릭';}
-  else if(rState==='go'){const ms=Date.now()-rStart;rState='idle';rHist.unshift(ms);if(rHist.length>5)rHist.pop();if(rBest===null||ms<rBest)rBest=ms;
-    document.getElementById('react-best').textContent='최고기록: '+rBest+'ms';
-    document.getElementById('react-history').innerHTML=rHist.map((v,i)=>`<span class="badge ${i===0?'success':''}">${v}ms</span>`).join('');
-    const g=ms<150?'⚡번개!':ms<250?'🔥빠름!':ms<400?'👍보통':'🐢느림';c.className='react-circle';c.innerHTML=ms+'ms<br>'+g;}
-}
+function reactClick(){const c=document.getElementById('react-circle');if(rState==='idle'){rState='waiting';c.className='react-circle ready';c.innerHTML='잠깐만요...';rTimer=setTimeout(()=>{rState='go';c.className='react-circle go';c.innerHTML='지금!<br>클릭!';rStart=Date.now();},1500+Math.random()*3000);}else if(rState==='waiting'){clearTimeout(rTimer);rState='idle';c.className='react-circle';c.innerHTML='너무 빨라요!<br>다시 클릭';}else if(rState==='go'){const ms=Date.now()-rStart;rState='idle';rHist.unshift(ms);if(rHist.length>5)rHist.pop();if(rBest===null||ms<rBest)rBest=ms;document.getElementById('react-best').textContent='최고기록: '+rBest+'ms';document.getElementById('react-history').innerHTML=rHist.map((v,i)=>`<span class="badge ${i===0?'success':''}">${v}ms</span>`).join('');const g=ms<150?'⚡번개!':ms<250?'🔥빠름!':ms<400?'👍보통':'🐢느림';c.className='react-circle';c.innerHTML=ms+'ms<br>'+g;}}
 
 // ===== 업다운 =====
 let uAns=0,uTries=0,uDone=false,uMin=1,uMax=100;
@@ -433,206 +368,168 @@ function cardReset(){clearInterval(cTimer);const deck=[...EMOJIS,...EMOJIS].sort
 function cardFlip(idx,el){if(cLock||cFlipped.includes(idx)||cMatched.includes(idx))return;el.textContent=cCards[idx];el.classList.add('flipped');cFlipped.push(idx);if(cFlipped.length===2){cLock=true;cMoves++;document.getElementById('card-moves').textContent=cMoves+'번 시도';const[a,b]=cFlipped;if(cCards[a]===cCards[b]){cMatched.push(a,b);document.querySelectorAll('.flip-card').forEach(c=>{if(cMatched.includes(parseInt(c.dataset.idx)))c.classList.replace('flipped','matched');});cFlipped=[];cLock=false;document.getElementById('card-pairs').textContent=cMatched.length/2+'/8 완성';if(cMatched.length===16){clearInterval(cTimer);document.getElementById('card-result').innerHTML=`<span style="color:var(--green)">🎉 ${cMoves}번, ${cSec}초 만에 완성!</span>`;}}else{document.querySelectorAll('.flip-card').forEach(c=>{if(cFlipped.includes(parseInt(c.dataset.idx)))c.classList.add('wrong');});setTimeout(()=>{document.querySelectorAll('.flip-card').forEach(c=>{if(cFlipped.includes(parseInt(c.dataset.idx))&&!cMatched.includes(parseInt(c.dataset.idx))){c.textContent='?';c.classList.remove('flipped','wrong');}});cFlipped=[];cLock=false;},700);}}}
 cardReset();
 
-// ===== 오늘의 운세 =====
-const ZODIACS=[{e:'🐭',n:'쥐'},{e:'🐮',n:'소'},{e:'🐯',n:'호랑이'},{e:'🐰',n:'토끼'},{e:'🐲',n:'용'},{e:'🐍',n:'뱀'},{e:'🐴',n:'말'},{e:'🐏',n:'양'},{e:'🐵',n:'원숭이'},{e:'🐔',n:'닭'},{e:'🐶',n:'개'},{e:'🐷',n:'돼지'}];
-const FORTUNE_MSG=[
-  ['오늘은 새로운 시작에 좋은 날','뜻밖의 행운이 찾아올 수 있어요','평소보다 에너지가 넘치는 날'],
-  ['신중하게 행동하면 좋은 결과가','작은 것에도 감사하는 하루','주변 사람과의 대화가 행운을 불러요'],
-  ['창의력이 빛나는 날이에요','직감을 믿어보세요','인내심이 좋은 결과를 만들어요'],
+// ===== 오늘의 운세 (개선) =====
+const ZODIACS=[
+  {e:'🐭',n:'쥐',years:[1924,1936,1948,1960,1972,1984,1996,2008,2020]},
+  {e:'🐮',n:'소',years:[1925,1937,1949,1961,1973,1985,1997,2009,2021]},
+  {e:'🐯',n:'호랑이',years:[1926,1938,1950,1962,1974,1986,1998,2010,2022]},
+  {e:'🐰',n:'토끼',years:[1927,1939,1951,1963,1975,1987,1999,2011,2023]},
+  {e:'🐲',n:'용',years:[1928,1940,1952,1964,1976,1988,2000,2012,2024]},
+  {e:'🍃',n:'뱀',years:[1929,1941,1953,1965,1977,1989,2001,2013,2025]},
+  {e:'🐴',n:'말',years:[1930,1942,1954,1966,1978,1990,2002,2014,2026]},
+  {e:'🐏',n:'양',years:[1931,1943,1955,1967,1979,1991,2003,2015]},
+  {e:'🐵',n:'원숭이',years:[1932,1944,1956,1968,1980,1992,2004,2016]},
+  {e:'🐔',n:'닭',years:[1933,1945,1957,1969,1981,1993,2005,2017]},
+  {e:'🐶',n:'개',years:[1934,1946,1958,1970,1982,1994,2006,2018]},
+  {e:'🐷',n:'돼지',years:[1935,1947,1959,1971,1983,1995,2007,2019]},
 ];
-const LUCKY_COLORS=['빨강','파랑','노랑','초록','보라','주황','핑크','하늘'];
-const LUCKY_NUMS=[3,7,11,17,21,33,42];
+
+const FORTUNE_MSGS=[
+  {overall:'오늘은 새로운 도전에 최적의 날입니다. 오랫동안 미뤄왔던 일을 시작해 보세요. 주변의 지지가 든든하게 따라올 것입니다.',love:'사랑하는 사람에게 먼저 다가가 보세요. 솔직한 마음을 표현할수록 관계가 깊어질 것입니다.',money:'뜻밖의 수입이 생길 가능성이 있어요. 충동구매는 자제하고 저축에 힘쓰는 것이 좋습니다.',health:'활동적으로 움직이기 좋은 날이에요. 가벼운 운동으로 몸의 활력을 불어넣어 보세요.'},
+  {overall:'신중함이 빛을 발하는 날입니다. 급하게 결정하기보다 충분히 생각한 뒤 행동하면 좋은 결과가 따라올 거예요.',love:'연인이나 가족과의 대화 시간을 늘려보세요. 작은 배려가 큰 감동을 줄 수 있는 날입니다.',money:'오늘은 투자보다 현재 자산을 지키는 데 집중하세요. 큰 지출은 다음으로 미루는 것이 현명합니다.',health:'과로를 주의하세요. 충분한 수면과 규칙적인 식사가 오늘의 건강을 지켜줄 것입니다.'},
+  {overall:'창의적인 아이디어가 넘치는 날이에요. 예술적인 활동이나 새로운 취미를 시작하기에 좋은 타이밍입니다.',love:'이상형에 가까운 사람과의 만남이 기대되는 날이에요. 자신감 있게 자신을 표현해 보세요.',money:'작은 투자가 좋은 결실을 맺을 수 있어요. 단, 욕심을 부리면 손해를 볼 수 있으니 적당한 선에서 만족하세요.',health:'스트레스 해소에 특히 신경 쓰세요. 좋아하는 음악을 듣거나 산책을 하면 마음이 가벼워질 거예요.'},
+];
+
+const LUCKY_COLORS=[{name:'빨강',color:'#f74f4f'},{name:'파랑',color:'#4f8ef7'},{name:'노랑',color:'#f7c94f'},{name:'초록',color:'#4ff7a0'},{name:'보라',color:'#a78bfa'},{name:'주황',color:'#f7714f'},{name:'핑크',color:'#f74faf'},{name:'하늘',color:'#4fbff7'}];
+const LUCKY_NUMS=[3,7,11,17,21,33,42,8,15,27];
 
 function initFortune(){
-  const g=document.getElementById('fortune-zodiac');
-  g.innerHTML=ZODIACS.map((z,i)=>`<button class="zodiac-btn" onclick="showFortune(${i},this)">${z.e}<br>${z.n}</button>`).join('');
+  document.getElementById('fortune-zodiac').innerHTML=ZODIACS.map((z,i)=>`<button class="zodiac-btn" onclick="showFortune(${i},this)">${z.e}<br>${z.n}</button>`).join('');
 }
 
 function showFortune(idx,btn){
   document.querySelectorAll('.zodiac-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   const z=ZODIACS[idx];
-  const seed=idx+new Date().getDate();
-  const overall=3+Math.floor((seed*7)%3);
-  const love=2+Math.floor((seed*11)%4);
-  const money=2+Math.floor((seed*13)%4);
-  const health=3+Math.floor((seed*9)%3);
-  const msg=FORTUNE_MSG[Math.floor((seed*3)%3)][Math.floor((seed*7)%3)];
-  const color=LUCKY_COLORS[(seed*5)%LUCKY_COLORS.length];
-  const num=LUCKY_NUMS[(seed*3)%LUCKY_NUMS.length];
-  const stars=n=>'⭐'.repeat(n)+'☆'.repeat(5-n);
+  const seed=idx+new Date().getDate()+new Date().getMonth();
+  const scores={overall:3+Math.floor((seed*7)%3),love:2+Math.floor((seed*11)%4),money:2+Math.floor((seed*13)%4),health:3+Math.floor((seed*9)%3)};
+  const msg=FORTUNE_MSGS[Math.floor((seed*3)%3)];
+  const lc=LUCKY_COLORS[(seed*5)%LUCKY_COLORS.length];
+  const ln=LUCKY_NUMS[(seed*3)%LUCKY_NUMS.length];
+
+  function bar(score,max=5){const pct=score/max*100;const color=pct>=80?'var(--green)':pct>=60?'var(--yellow)':'var(--red)';return`<div class="fi-bar"><div class="fi-bar-fill" style="width:${pct}%;background:${color}"></div></div>`;}
+  function scoreText(s){return['','매우 나쁨','나쁨','보통','좋음','매우 좋음'][s]||'보통';}
+
+  const yearsHTML=z.years.filter(y=>y>=1940).map(y=>`<span class="year-badge">${y}년생</span>`).join('');
+
   const r=document.getElementById('fortune-result');
-  r.className='fortune-card show';
+  r.className='fortune-result-card show';
   r.innerHTML=`
-    <div style="text-align:center;font-size:2.5rem;margin-bottom:6px">${z.e}</div>
-    <div style="text-align:center;font-weight:900;font-size:1rem;margin-bottom:4px">${z.n}띠의 오늘 운세</div>
-    <div style="font-size:0.82rem;color:var(--muted);text-align:center;margin-bottom:12px">${msg}</div>
-    <div class="fortune-score">
-      <div class="fortune-item"><div class="fi-label">전체운</div><div class="fi-stars">${stars(overall)}</div></div>
-      <div class="fortune-item"><div class="fi-label">애정운</div><div class="fi-stars">${stars(love)}</div></div>
-      <div class="fortune-item"><div class="fi-label">금전운</div><div class="fi-stars">${stars(money)}</div></div>
-      <div class="fortune-item"><div class="fi-label">건강운</div><div class="fi-stars">${stars(health)}</div></div>
+    <div style="text-align:center;margin-bottom:12px">
+      <div style="font-size:2.8rem">${z.e}</div>
+      <div style="font-weight:900;font-size:1.1rem;margin-top:4px">${z.n}띠</div>
+      <div class="fortune-years" style="justify-content:center;margin-top:8px">${yearsHTML}</div>
     </div>
-    <div class="fortune-lucky">
-      <span class="lucky-badge" style="background:rgba(167,139,250,0.2);color:var(--purple)">🎨 행운의 색: ${color}</span>
-      <span class="lucky-badge" style="background:rgba(79,142,247,0.15);color:var(--accent)">🔢 행운의 숫자: ${num}</span>
+    <div class="fortune-main-msg">${msg.overall}</div>
+    <div class="fortune-grid">
+      <div class="fortune-item">
+        <div class="fi-label">💕 애정운 — ${scoreText(scores.love)}</div>
+        ${bar(scores.love)}
+        <div class="fi-text">${msg.love}</div>
+      </div>
+      <div class="fortune-item">
+        <div class="fi-label">💰 금전운 — ${scoreText(scores.money)}</div>
+        ${bar(scores.money)}
+        <div class="fi-text">${msg.money}</div>
+      </div>
+      <div class="fortune-item" style="grid-column:span 2">
+        <div class="fi-label">💪 건강운 — ${scoreText(scores.health)}</div>
+        ${bar(scores.health)}
+        <div class="fi-text">${msg.health}</div>
+      </div>
+    </div>
+    <div class="lucky-row">
+      <span class="lucky-badge" style="background:${lc.color}22;color:${lc.color};border:1px solid ${lc.color}44">🎨 행운의 색: ${lc.name}</span>
+      <span class="lucky-badge" style="background:rgba(79,142,247,0.15);color:var(--accent)">🔢 행운의 숫자: ${ln}</span>
     </div>`;
 }
 initFortune();
 
-// ===== 주사위 배틀 =====
-const DICE_FACES=['⚀','⚁','⚂','⚃','⚄','⚅'];
-let dWin=0,dLose=0,dDraw=0,dHist=[];
-function rollDice(){
-  const btn=document.getElementById('dice-btn');btn.disabled=true;
-  const my=document.getElementById('my-dice'),com=document.getElementById('com-dice');
-  let count=0;
-  const interval=setInterval(()=>{
-    my.textContent=DICE_FACES[Math.floor(Math.random()*6)];
-    com.textContent=DICE_FACES[Math.floor(Math.random()*6)];
-    my.classList.add('rolling');com.classList.add('rolling');
-    count++;if(count>8){clearInterval(interval);
-      const mv=Math.floor(Math.random()*6)+1,cv=Math.floor(Math.random()*6)+1;
-      my.textContent=DICE_FACES[mv-1];com.textContent=DICE_FACES[cv-1];
-      my.classList.remove('rolling');com.classList.remove('rolling');
-      document.getElementById('my-score').textContent=mv;document.getElementById('com-score').textContent=cv;
-      const res=document.getElementById('dice-result');
-      if(mv>cv){dWin++;res.innerHTML='<span style="color:var(--green)">🎉 내가 이겼어요!</span>';}
-      else if(mv<cv){dLose++;res.innerHTML='<span style="color:var(--red)">😢 졌어요...</span>';}
-      else{dDraw++;res.innerHTML='<span style="color:var(--yellow)">🤝 무승부!</span>';}
-      document.getElementById('dice-win').textContent='승: '+dWin;document.getElementById('dice-lose').textContent='패: '+dLose;document.getElementById('dice-draw').textContent='무: '+dDraw;
-      dHist.unshift(`${DICE_FACES[mv-1]}${mv} vs ${DICE_FACES[cv-1]}${cv}`);if(dHist.length>5)dHist.pop();
-      document.getElementById('dice-history').textContent='최근: '+dHist.join(' | ');
-      btn.disabled=false;}},120);}
+// ===== 주사위 =====
+const DF=['⚀','⚁','⚂','⚃','⚄','⚅'];
+let dW=0,dL=0,dD=0,dH=[];
+function rollDice(){const btn=document.getElementById('dice-btn');btn.disabled=true;const my=document.getElementById('my-dice'),com=document.getElementById('com-dice');let cnt=0;const iv=setInterval(()=>{my.textContent=DF[Math.floor(Math.random()*6)];com.textContent=DF[Math.floor(Math.random()*6)];my.classList.add('rolling');com.classList.add('rolling');cnt++;if(cnt>8){clearInterval(iv);const mv=Math.floor(Math.random()*6)+1,cv=Math.floor(Math.random()*6)+1;my.textContent=DF[mv-1];com.textContent=DF[cv-1];my.classList.remove('rolling');com.classList.remove('rolling');document.getElementById('my-score').textContent=mv;document.getElementById('com-score').textContent=cv;const res=document.getElementById('dice-result');if(mv>cv){dW++;res.innerHTML='<span style="color:var(--green)">🎉 내가 이겼어요!</span>';}else if(mv<cv){dL++;res.innerHTML='<span style="color:var(--red)">😢 졌어요...</span>';}else{dD++;res.innerHTML='<span style="color:var(--yellow)">🤝 무승부!</span>';}document.getElementById('dice-win').textContent='승: '+dW;document.getElementById('dice-lose').textContent='패: '+dL;document.getElementById('dice-draw').textContent='무: '+dD;dH.unshift(DF[mv-1]+mv+' vs '+DF[cv-1]+cv);if(dH.length>5)dH.pop();document.getElementById('dice-history').textContent='최근: '+dH.join(' | ');btn.disabled=false;}},120);}
 
-// ===== 룰렛 =====
-const ROULETTE_ITEMS=['🍀 대박운','💔 불운','💰 금전운','😴 평범한 날','⭐ 귀인 등장','🎯 도전 성공','🌈 행운','😱 조심해요'];
-const ROULETTE_COLORS=['#4ff7a0','#f74f4f','#f7c94f','#7a7f9a','#4f8ef7','#a78bfa','#4fbff7','#f7714f'];
+// ===== 룰렛 (개선) =====
+let roulItems=['🍀 대박운','💔 불운','💰 금전운','😴 평범한 날','⭐ 귀인 등장','🎯 도전 성공','🌈 행운','😱 조심해요'];
+const ROULETTE_COLORS=['#4ff7a0','#f74f4f','#f7c94f','#7a7f9a','#4f8ef7','#a78bfa','#4fbff7','#f7714f','#f77f4f','#4ff7c0','#d4f74f','#f74faf'];
 let roulAngle=0,roulSpinning=false;
 
+function renderRouletteItems(){
+  const wrap=document.getElementById('roulette-items-wrap');
+  wrap.innerHTML=roulItems.map((item,i)=>`
+    <div class="roulette-item-row">
+      <div style="width:14px;height:14px;border-radius:50%;background:${ROULETTE_COLORS[i%ROULETTE_COLORS.length]};flex-shrink:0"></div>
+      <input class="roulette-item-input" value="${item}" id="ri-${i}" placeholder="항목 입력">
+      <button class="btn sm danger-btn" onclick="removeRouletteItem(${i})">✕</button>
+    </div>`).join('');
+}
+
+function addRouletteItem(){
+  if(roulItems.length>=12){alert('최대 12개까지 가능해요!');return;}
+  roulItems.push('새 항목 '+(roulItems.length+1));
+  renderRouletteItems();applyRoulette();
+}
+
+function removeRouletteItem(i){
+  if(roulItems.length<=2){alert('최소 2개는 있어야 해요!');return;}
+  roulItems.splice(i,1);renderRouletteItems();applyRoulette();
+}
+
+function resetRouletteItems(){roulItems=['🍀 대박운','💔 불운','💰 금전운','😴 평범한 날','⭐ 귀인 등장','🎯 도전 성공','🌈 행운','😱 조심해요'];renderRouletteItems();applyRoulette();}
+
+function applyRoulette(){
+  roulItems=roulItems.map((_,i)=>document.getElementById('ri-'+i)?.value||roulItems[i]);
+  renderRouletteItems();drawRoulette(roulAngle);document.getElementById('roulette-result').textContent='';
+}
+
 function drawRoulette(angle){
-  const canvas=document.getElementById('roulette-canvas');
-  const ctx=canvas.getContext('2d');const cx=120,cy=120,r=116;
-  const n=ROULETTE_ITEMS.length;const slice=Math.PI*2/n;
+  const canvas=document.getElementById('roulette-canvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const cx=120,cy=120,r=116,n=roulItems.length,slice=Math.PI*2/n;
   ctx.clearRect(0,0,240,240);
   for(let i=0;i<n;i++){
     ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,angle+slice*i,angle+slice*(i+1));ctx.closePath();
-    ctx.fillStyle=ROULETTE_COLORS[i];ctx.fill();ctx.strokeStyle='#0f1117';ctx.lineWidth=2;ctx.stroke();
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(angle+slice*i+slice/2);ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 11px Noto Sans KR,sans-serif';ctx.fillText(ROULETTE_ITEMS[i],r-8,4);ctx.restore();
+    ctx.fillStyle=ROULETTE_COLORS[i%ROULETTE_COLORS.length];ctx.fill();ctx.strokeStyle='#0f1117';ctx.lineWidth=2;ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(angle+slice*i+slice/2);ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 11px Noto Sans KR,sans-serif';ctx.fillText(roulItems[i],r-8,4);ctx.restore();
   }
-  ctx.beginPath();ctx.arc(cx,cy,12,0,Math.PI*2);ctx.fillStyle='#0f1117';ctx.fill();ctx.strokeStyle=ROULETTE_COLORS[0];ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,14,0,Math.PI*2);ctx.fillStyle='#0f1117';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
 }
 
 function spinRoulette(){
-  if(roulSpinning)return;roulSpinning=true;
-  document.getElementById('spin-btn').disabled=true;document.getElementById('roulette-result').textContent='';
-  const totalAngle=Math.PI*2*(5+Math.random()*5);const duration=3000;const start=Date.now();const startAngle=roulAngle;
-  function animate(){const elapsed=Date.now()-start;const progress=Math.min(elapsed/duration,1);const ease=1-Math.pow(1-progress,3);roulAngle=startAngle+totalAngle*ease;drawRoulette(roulAngle);if(progress<1){requestAnimationFrame(animate);}else{
-    const ptr=(-Math.PI/2-roulAngle%(Math.PI*2)+Math.PI*2)%(Math.PI*2);const idx=Math.floor(ptr/(Math.PI*2)*ROULETTE_ITEMS.length)%ROULETTE_ITEMS.length;
-    document.getElementById('roulette-result').innerHTML=`<span style="color:${ROULETTE_COLORS[idx]};font-size:1.3rem">${ROULETTE_ITEMS[idx]}</span>`;
-    roulSpinning=false;document.getElementById('spin-btn').disabled=false;}}
+  if(roulSpinning)return;
+  applyRoulette();
+  roulSpinning=true;document.getElementById('spin-btn').disabled=true;document.getElementById('roulette-result').textContent='';
+  const totalAngle=Math.PI*2*(5+Math.random()*5),duration=3500,start=Date.now(),startAngle=roulAngle;
+  function animate(){const elapsed=Date.now()-start,progress=Math.min(elapsed/duration,1),ease=1-Math.pow(1-progress,3);roulAngle=startAngle+totalAngle*ease;drawRoulette(roulAngle);if(progress<1){requestAnimationFrame(animate);}else{const n=roulItems.length,ptr=((-Math.PI/2-roulAngle%(Math.PI*2))+Math.PI*2*10)%(Math.PI*2),idx=Math.floor(ptr/(Math.PI*2)*n)%n;const color=ROULETTE_COLORS[idx%ROULETTE_COLORS.length];document.getElementById('roulette-result').innerHTML=`<span style="color:${color}">${roulItems[idx]}</span>`;roulSpinning=false;document.getElementById('spin-btn').disabled=false;}}
   animate();
 }
-drawRoulette(0);
+renderRouletteItems();drawRoulette(0);
 
 // ===== 블랙잭 =====
-const SUITS=['♠','♥','♦','♣'];const RANKS=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+const SUITS=['♠','♥','♦','♣'],RANKS=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 let bjDeck=[],bjPlayer=[],bjDealer=[],bjMoney=1000,bjBet=0,bjPhase='bet';
-
-function initBJChips(){
-  const chips=[10,50,100,200,500];const colors=['#4f8ef7','#4ff7a0','#f7c94f','#f74f4f','#a78bfa'];
-  document.getElementById('bj-chips').innerHTML=chips.map((v,i)=>`<div class="bj-chip" style="border-color:${colors[i]};color:${colors[i]}" onclick="bjAddBet(${v})">+${v}</div>`).join('');
-}
-
+function initBJChips(){const chips=[10,50,100,200,500],colors=['#4f8ef7','#4ff7a0','#f7c94f','#f74f4f','#a78bfa'];document.getElementById('bj-chips').innerHTML=chips.map((v,i)=>`<div class="bj-chip" style="border-color:${colors[i]};color:${colors[i]}" onclick="bjAddBet(${v})">+${v}</div>`).join('');}
 function bjAddBet(v){if(bjPhase!=='bet')return;if(bjBet+v>bjMoney)return;bjBet+=v;document.getElementById('bj-bet-display').textContent=bjBet;}
-
 function bjMakeDeck(){bjDeck=[];SUITS.forEach(s=>RANKS.forEach(r=>bjDeck.push({s,r})));bjDeck.sort(()=>Math.random()-0.5);}
-
 function bjVal(cards){let sum=0,aces=0;cards.forEach(c=>{if(['J','Q','K'].includes(c.r))sum+=10;else if(c.r==='A'){sum+=11;aces++;}else sum+=parseInt(c.r);});while(sum>21&&aces>0){sum-=10;aces--;}return sum;}
-
-function bjCardHTML(c,hidden=false){if(hidden)return`<div class="bj-card hidden">🂠</div>`;const red=['♥','♦'].includes(c.s);return`<div class="bj-card ${red?'red':''}">${c.r}<br>${c.s}</div>`;}
-
-function bjRender(hideDealer=true){
-  document.getElementById('player-cards').innerHTML=bjPlayer.map(c=>bjCardHTML(c)).join('');
-  document.getElementById('dealer-cards').innerHTML=bjDealer.map((c,i)=>bjCardHTML(c,hideDealer&&i===1)).join('');
-  document.getElementById('player-score').textContent='합계: '+bjVal(bjPlayer);
-  document.getElementById('dealer-score').textContent=hideDealer?'합계: ?':'합계: '+bjVal(bjDealer);
-}
-
-function bjDeal(){
-  if(bjBet===0){document.getElementById('bj-result').innerHTML='<span style="color:var(--yellow)">배팅 금액을 먼저 선택하세요!</span>';return;}
-  bjMakeDeck();bjPlayer=[bjDeck.pop(),bjDeck.pop()];bjDealer=[bjDeck.pop(),bjDeck.pop()];bjPhase='play';
-  bjRender(true);
-  document.getElementById('bj-actions').innerHTML=`<button class="btn primary" onclick="bjHit()">카드 받기</button><button class="btn" onclick="bjStand()">멈추기</button>`;
-  document.getElementById('bj-result').textContent='';
-  if(bjVal(bjPlayer)===21){bjEnd();}
-}
-
+function bjCardHTML(c,hidden=false){if(hidden)return`<div class="bj-card" style="font-size:1.5rem">🂠</div>`;const red=['♥','♦'].includes(c.s);return`<div class="bj-card ${red?'red':''}">${c.r}<br>${c.s}</div>`;}
+function bjRender(hideDealer=true){document.getElementById('player-cards').innerHTML=bjPlayer.map(c=>bjCardHTML(c)).join('');document.getElementById('dealer-cards').innerHTML=bjDealer.map((c,i)=>bjCardHTML(c,hideDealer&&i===1)).join('');document.getElementById('player-score').textContent='합계: '+bjVal(bjPlayer);document.getElementById('dealer-score').textContent=hideDealer?'합계: ?':'합계: '+bjVal(bjDealer);}
+function bjDeal(){if(bjBet===0){document.getElementById('bj-result').innerHTML='<span style="color:var(--yellow)">배팅 금액을 먼저 선택하세요!</span>';return;}bjMakeDeck();bjPlayer=[bjDeck.pop(),bjDeck.pop()];bjDealer=[bjDeck.pop(),bjDeck.pop()];bjPhase='play';bjRender(true);document.getElementById('bj-actions').innerHTML=`<button class="btn primary" onclick="bjHit()">카드 받기</button><button class="btn" onclick="bjStand()">멈추기</button>`;document.getElementById('bj-result').textContent='';if(bjVal(bjPlayer)===21)bjEnd();}
 function bjHit(){bjPlayer.push(bjDeck.pop());bjRender(true);if(bjVal(bjPlayer)>21)bjEnd();}
-
-function bjStand(){
-  bjRender(false);
-  while(bjVal(bjDealer)<17)bjDealer.push(bjDeck.pop());
-  bjRender(false);bjEnd();
-}
-
-function bjEnd(){
-  bjRender(false);bjPhase='bet';
-  const pv=bjVal(bjPlayer),dv=bjVal(bjDealer);
-  const res=document.getElementById('bj-result');
-  let msg='';
-  if(pv>21){bjMoney-=bjBet;msg=`<span style="color:var(--red)">💥 버스트! -${bjBet}</span>`;}
-  else if(dv>21||pv>dv){bjMoney+=bjBet;msg=`<span style="color:var(--green)">🎉 승리! +${bjBet}</span>`;}
-  else if(pv<dv){bjMoney-=bjBet;msg=`<span style="color:var(--red)">😢 패배... -${bjBet}</span>`;}
-  else{msg=`<span style="color:var(--yellow)">🤝 무승부</span>`;}
-  res.innerHTML=msg;bjBet=0;
-  document.getElementById('bj-money').textContent=bjMoney;document.getElementById('bj-bet-display').textContent=0;
-  document.getElementById('bj-actions').innerHTML=`<button class="btn primary" onclick="bjDeal()">🃏 다시 하기</button>`;
-  if(bjMoney<=0){document.getElementById('bj-actions').innerHTML='<button class="btn" onclick="bjReset()">💰 돈 충전</button>';}
-}
-
+function bjStand(){bjRender(false);while(bjVal(bjDealer)<17)bjDealer.push(bjDeck.pop());bjRender(false);bjEnd();}
+function bjEnd(){bjRender(false);bjPhase='bet';const pv=bjVal(bjPlayer),dv=bjVal(bjDealer);const res=document.getElementById('bj-result');let msg='';if(pv>21){bjMoney-=bjBet;msg=`<span style="color:var(--red)">💥 버스트! -${bjBet}</span>`;}else if(dv>21||pv>dv){bjMoney+=bjBet;msg=`<span style="color:var(--green)">🎉 승리! +${bjBet}</span>`;}else if(pv<dv){bjMoney-=bjBet;msg=`<span style="color:var(--red)">😢 패배... -${bjBet}</span>`;}else{msg=`<span style="color:var(--yellow)">🤝 무승부</span>`;}res.innerHTML=msg;bjBet=0;document.getElementById('bj-money').textContent=bjMoney;document.getElementById('bj-bet-display').textContent=0;document.getElementById('bj-actions').innerHTML=`<button class="btn primary" onclick="bjDeal()">🃏 다시 하기</button>`;if(bjMoney<=0){document.getElementById('bj-actions').innerHTML='<button class="btn" onclick="bjReset()">💰 돈 충전 (리셋)</button>';}}
 function bjReset(){bjMoney=1000;bjBet=0;bjPhase='bet';document.getElementById('bj-money').textContent=bjMoney;document.getElementById('bj-bet-display').textContent=0;document.getElementById('bj-actions').innerHTML=`<button class="btn primary" onclick="bjDeal()">🃏 게임 시작</button>`;document.getElementById('player-cards').innerHTML='';document.getElementById('dealer-cards').innerHTML='';document.getElementById('player-score').textContent='';document.getElementById('dealer-score').textContent='';document.getElementById('bj-result').textContent='';}
 initBJChips();
 
 // ===== 2048 =====
 let g2Board=[],g2Score=0,g2Best=0;
-const G2COLORS={'':['#21253a','#7a7f9a'],2:['#3a4a6a','#a0c4ff'],4:['#2a4a5a','#4fbff7'],8:['#1a5a3a','#4ff7a0'],16:['#5a4a1a','#f7c94f'],32:['#5a2a1a','#f7714f'],64:['#4a1a1a','#f74f4f'],128:['#3a1a5a','#a78bfa'],256:['#1a3a5a','#4f8ef7'],512:['#1a5a4a','#2fffb0'],1024:['#5a3a1a','#ffb04f'],2048:['#5a1a3a','#ff4f9a']};
-
-function init2048(){
-  g2Board=Array(4).fill(null).map(()=>Array(4).fill(0));g2Score=0;
-  add2048Tile();add2048Tile();render2048();document.getElementById('g2048-result').textContent='';
-}
-
-function add2048Tile(){
-  const empty=[];g2Board.forEach((r,i)=>r.forEach((c,j)=>{if(c===0)empty.push([i,j]);}));
-  if(!empty.length)return;const[r,c]=empty[Math.floor(Math.random()*empty.length)];g2Board[r][c]=Math.random()<0.9?2:4;
-}
-
-function render2048(){
-  const g=document.getElementById('g2048-grid');g.innerHTML='';
-  g2Board.forEach(row=>row.forEach(v=>{const cell=document.createElement('div');cell.className='g2048-cell';const colors=G2COLORS[v]||G2COLORS[2048];cell.style.background=colors[0];cell.style.color=colors[1];cell.textContent=v||'';g.appendChild(cell);}));
-  document.getElementById('g2048-score').textContent=g2Score;document.getElementById('g2048-best').textContent=g2Best;
-}
-
-function move2048(dir){
-  const prev=JSON.stringify(g2Board);let moved=false;
-  if(dir==='left'||dir==='right'){g2Board=g2Board.map(row=>mergeRow(dir==='right'?[...row].reverse():row,dir==='right'));}
-  else{const t=g2Board[0].map((_,i)=>g2Board.map(r=>r[i]));const merged=t.map(col=>mergeRow(dir==='down'?[...col].reverse():col,dir==='down'));g2Board=merged[0].map((_,i)=>merged.map(r=>r[i]));}
-  if(JSON.stringify(g2Board)!==prev){add2048Tile();render2048();}
-  if(g2Board.flat().includes(2048)&&!document.getElementById('g2048-result').textContent){document.getElementById('g2048-result').innerHTML='<span style="color:var(--green)">🎉 2048 달성!</span>';}
-  if(!canMove2048()){document.getElementById('g2048-result').innerHTML='<span style="color:var(--red)">💥 게임 오버!</span>';}
-}
-
-function mergeRow(row,rev){
-  let r=row.filter(x=>x!==0);
-  for(let i=0;i<r.length-1;i++){if(r[i]===r[i+1]){g2Score+=r[i]*2;g2Best=Math.max(g2Best,g2Score);r[i]*=2;r.splice(i+1,1);}}
-  while(r.length<4)r.push(0);return rev?r.reverse():r;
-}
-
-function canMove2048(){
-  for(let r=0;r<4;r++)for(let c=0;c<4;c++){if(g2Board[r][c]===0)return true;if(c<3&&g2Board[r][c]===g2Board[r][c+1])return true;if(r<3&&g2Board[r][c]===g2Board[r+1][c])return true;}return false;
-}
-
+const G2C={'':['#21253a','#7a7f9a'],2:['#3a4a6a','#a0c4ff'],4:['#2a4a5a','#4fbff7'],8:['#1a5a3a','#4ff7a0'],16:['#5a4a1a','#f7c94f'],32:['#5a2a1a','#f7714f'],64:['#4a1a1a','#f74f4f'],128:['#3a1a5a','#a78bfa'],256:['#1a3a5a','#4f8ef7'],512:['#1a5a4a','#2fffb0'],1024:['#5a3a1a','#ffb04f'],2048:['#5a1a3a','#ff4f9a']};
+function init2048(){g2Board=Array(4).fill(null).map(()=>Array(4).fill(0));g2Score=0;add2048Tile();add2048Tile();render2048();document.getElementById('g2048-result').textContent='';}
+function add2048Tile(){const empty=[];g2Board.forEach((r,i)=>r.forEach((c,j)=>{if(c===0)empty.push([i,j]);}));if(!empty.length)return;const[r,c]=empty[Math.floor(Math.random()*empty.length)];g2Board[r][c]=Math.random()<0.9?2:4;}
+function render2048(){const g=document.getElementById('g2048-grid');g.innerHTML='';g2Board.forEach(row=>row.forEach(v=>{const cell=document.createElement('div');cell.className='g2048-cell';const colors=G2C[v]||G2C[2048];cell.style.background=colors[0];cell.style.color=colors[1];cell.textContent=v||'';g.appendChild(cell);}));document.getElementById('g2048-score').textContent=g2Score;document.getElementById('g2048-best').textContent=g2Best;}
+function move2048(dir){const prev=JSON.stringify(g2Board);if(dir==='left'||dir==='right'){g2Board=g2Board.map(row=>mergeRow(dir==='right'?[...row].reverse():row,dir==='right'));}else{const t=g2Board[0].map((_,i)=>g2Board.map(r=>r[i]));const merged=t.map(col=>mergeRow(dir==='down'?[...col].reverse():col,dir==='down'));g2Board=merged[0].map((_,i)=>merged.map(r=>r[i]));}if(JSON.stringify(g2Board)!==prev){add2048Tile();render2048();}if(g2Board.flat().includes(2048)&&!document.getElementById('g2048-result').textContent){document.getElementById('g2048-result').innerHTML='<span style="color:var(--green)">🎉 2048 달성!</span>';}if(!canMove2048()){document.getElementById('g2048-result').innerHTML='<span style="color:var(--red)">💥 게임 오버!</span>';}}
+function mergeRow(row,rev){let r=row.filter(x=>x!==0);for(let i=0;i<r.length-1;i++){if(r[i]===r[i+1]){g2Score+=r[i]*2;g2Best=Math.max(g2Best,g2Score);r[i]*=2;r.splice(i+1,1);}}while(r.length<4)r.push(0);return rev?r.reverse():r;}
+function canMove2048(){for(let r=0;r<4;r++)for(let c=0;c<4;c++){if(g2Board[r][c]===0)return true;if(c<3&&g2Board[r][c]===g2Board[r][c+1])return true;if(r<3&&g2Board[r][c]===g2Board[r+1][c])return true;}return false;}
 document.addEventListener('keydown',e=>{if(document.getElementById('tab-g2048').classList.contains('show')){const m={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};if(m[e.key]){e.preventDefault();move2048(m[e.key]);}}});
 init2048();
 </script>
